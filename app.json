@@ -1,0 +1,55 @@
+## GET DHIS2 information 
+let username = 'admin';
+let password = 'district';
+let urlApi=baseUrl."/api/dataValueSets?dataSet=2sae1wexar5&period=201806&orgUnit=khG2ss1Ax2Y";
+let options = {
+	method: 'GET',
+	url: urlApi,
+	headers: { 
+		'Authorization': fn.base_64_auth(username,password),
+		'Accept': 'application/json',
+		'Content-Type': 'application/json' 
+	},
+	from: {
+	  mimeType: 'application/json'
+	}
+}; // end of options
+// get json response		
+request(options, function(error, response, body) {
+	let dataOutput = JSON.stringify(JSON.parse(body));
+}
+
+## POST DHIS2 information 
+
+let username = 'Your dhis2 username';
+let password = 'Your dhis2 password';
+let jsonPayload = '{
+  "dataSet": "iReVg2xgFPL", //Monthly eLMIS Dataset-final
+  "completeDate": "2018-05-13",
+  "period": "201801",
+  "orgUnit": "WPqHGtwerEu", // Jhalokati Civil Surgeons Office, Jhalokati
+  "dataValues": [
+    { "dataElement": "ta8v9gj6aQC", "value": "100" },
+    { "dataElement": "yQfHIwxvCmb", "value": "200" },
+    { "dataElement": "CRueZPFX52M", "value": "300" }
+  ]
+}';
+let postApiUrl= 'yoururl/dhis28/api/dataValueSets';
+let options = {
+	method: 'POST',
+	url: postApiUrl,
+	body: JSON.stringify(jsonPayload),	
+	headers: { 
+		'Authorization': fn.base_64_auth(username,password),
+		'Accept': 'application/json',
+		'Content-Type': 'application/json' 
+	},
+	from: {
+        mimeType: 'application/json'
+	}
+}; // end of options
+
+// get json response		
+request(options, function(error, response, body) {
+	let getResponse = JSON.stringify(JSON.parse(response));
+}
